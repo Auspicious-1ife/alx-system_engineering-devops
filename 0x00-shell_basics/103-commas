@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -Ap1 | awk '{ORS=(NR%2==0)?", ":"\n"} 1' | sed 's/,$/\n/'
+ls -xamp
