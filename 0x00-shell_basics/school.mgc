@@ -1,2 +1,2 @@
 #!/bin/bash
-cd /path/to/directory/
+echo -e "0	string	SCHOOL	School data file" > school.mgc
