@@ -1,0 +1,2 @@
+#!/bin/bash
+result=$((5#${WATER//[w,a,t,e,r]/01234} + 5#${STIR//[s,t,i,r,.]/01234})); echo ${result//01234567/bestchol}
