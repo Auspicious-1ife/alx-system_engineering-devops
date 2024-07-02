@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Update package list and install Nginx
+apt-get update -y
+apt-get install nginx -y
+
+# Create the HTML file with "Hello World!" content
+echo "Hello World!" > /var/www/html/index.html
+
+# Start Nginx (use service instead of systemctl)
+service nginx start
+
+# Ensure Nginx starts on boot
+update-rc.d nginx defaults
+
