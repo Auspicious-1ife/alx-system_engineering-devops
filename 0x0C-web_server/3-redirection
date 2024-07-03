@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Ensure Nginx is installed and running
+sudo systemctl status nginx >/dev/null 2>&1 || { echo >&2 "Nginx is not installed or running. Exiting."; exit 1; }
+
+# Define the redirection configuration file
+REDIRECT_CONF="/etc/nginx/sites-available/redirect_me"
+
+# Create a new Nginx server block configuration for redirection
+echo "server {" | sudo tee ${REDIRECT_CONF} >/dev/null
+echo "    listen 80;" | sudo tee -a ${REDIRECT_CONF} >/dev/null
+echo "    server_name _;" | sudo tee -a ${REDIRECT_CONF} >/dev/null
+echo "    location /redirect_me {" | sudo tee -a ${REDIRECT_CONF} >/dev/null
+echo "        return 301 https://www.example.com/new_page;" | sudo tee -a ${REDIRECT_CONF} >/dev/null
+echo "    }" | sudo tee -a ${REDIRECT_CONF} >/dev/null
+echo "}" | sudo tee -a ${REDIRECT_CONF} >/dev/null
+
+# Create a symbolic link to enable the redirection configuration
+sudo ln -s ${REDIRECT_CONF} /etc/nginx/sites-enabled/
+
+# Test Nginx configuration syntax
+sudo nginx -t
+
+# If syntax is okay, reload Nginx to apply changes
+sudo systemctl reload nginx
+
+# Output success message
+echo "Redirection configured successfully."
