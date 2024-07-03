@@ -1,5 +1,4 @@
-#!/bin/bash
-
+ #!/usr/bin/env bash
 # Ensure Nginx is installed and running
 sudo systemctl status nginx >/dev/null 2>&1 || { echo >&2 "Nginx is not installed or running. Exiting."; exit 1; }
 
