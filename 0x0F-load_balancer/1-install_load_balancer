@@ -1,18 +1,24 @@
 #!/usr/bin/env bash
 # Installs HAProxy version 1.8 with the following configurations:
-#+    Enables management via the init script.
-#+    Distributes requests using a round-robin algorithm.
+# Enables management via the init script.
+# Distributes requests using a round-robin algorithm.
 
+# Install necessary packages and add repository
 apt-get install -y software-properties-common
 add-apt-repository -y ppa:vbernat/haproxy-1.8
 apt-get update
-apt-get install -y haproxy=1.8.\*
+apt-get install -y haproxy=1.8.*
 
+# Enable HAProxy to start at boot
 echo "ENABLED=1" >> /etc/default/haproxy
+
+# Backup original configuration and create new one
 mv /etc/haproxy/haproxy.cfg{,.original}
 touch /etc/haproxy/haproxy.cfg
 
-printf %s "global
+# Write new configuration
+cat <<EOL > /etc/haproxy/haproxy.cfg
+global
     log 127.0.0.1 local0 notice
     maxconn 2000
     user haproxy
@@ -39,7 +45,8 @@ listen hbnb
     option forwardfor
     server 217081-web-01 3.83.253.53 check
     server 217081-web-02 100.26.163.202 check
-" >> /etc/haproxy/haproxy.cfg
+EOL
 
+# Start HAProxy service
 service haproxy start
 
