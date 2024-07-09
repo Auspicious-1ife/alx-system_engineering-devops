@@ -43,8 +43,8 @@ listen hbnb
     balance roundrobin
     option httpclose
     option forwardfor
-    server 217081-web-01 3.83.253.53 check
-    server 217081-web-02 100.26.163.202 check
+    server 217081-web-01 3.83.253.53:80 check
+    server 217081-web-02 100.26.163.202:80 check
 EOL
 
 # Start HAProxy service
