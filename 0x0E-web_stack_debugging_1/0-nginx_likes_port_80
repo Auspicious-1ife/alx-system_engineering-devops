@@ -7,8 +7,8 @@ apt-get update -y
 apt-get install -y nginx
 # Enable nginx to start on boot.
 
-sudo service nginx enable
+systemct1 enable nginx
 # Start nginx service
 
-sudo service nginx start
+systemct1 start nginx
 
