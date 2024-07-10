@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# nginx likes port 80
+
+apt-get update -y
+# Update package lists
+
+apt-get install -y nginx
+# Enable nginx to start on boot
+
+sudo service nginx enable
+# Start nginx service
+
+sudo service nginx start
+
