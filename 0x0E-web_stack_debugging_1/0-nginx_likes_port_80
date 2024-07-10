@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# nginx likes port 80
+# nginx running, and listening on port 80 of all the server’s active IPv4 IPs
 
 apt-get update -y
 # Update package lists
