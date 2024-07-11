@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Ensure Nginx is installed and running
+sudo systemctl status nginx >/dev/null 2>&1 || { echo >&2 "Nginx is not installed or running. Exiting."; exit 1; }
+
+# Define the custom 404 page location
+NOT_FOUND_PAGE="/var/www/html/404.html"
+
+# Create the custom 404 page with required content
+echo "<!DOCTYPE html>" | sudo tee ${NOT_FOUND_PAGE} >/dev/null
+echo "<html>" | sudo tee -a ${NOT_FOUND_PAGE} >/dev/null
+echo "<head><title>404 Not Found</title></head>" | sudo tee -a ${NOT_FOUND_PAGE} >/dev/null
+echo "<body>" | sudo tee -a ${NOT_FOUND_PAGE} >/dev/null
+echo "<h1>404 Not Found</h1>" | sudo tee -a ${NOT_FOUND_PAGE} >/dev/null
+echo "<p>Ceci n'est pas une page</p>" | sudo tee -a ${NOT_FOUND_PAGE} >/dev/null
+echo "</body>" | sudo tee -a ${NOT_FOUND_PAGE} >/dev/null
+echo "</html>" | sudo tee -a ${NOT_FOUND_PAGE} >/dev/null
+
+# Configure Nginx to use the custom 404 page
+sudo bash -c "cat > /etc/nginx/sites-available/default <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF"
+
+# Test Nginx configuration syntax
+sudo nginx -t
+
+# If syntax is okay, reload Nginx to apply changes
+sudo systemctl reload nginx
+
+# Output success message
+echo "Custom 404 page configured successfully."
