@@ -30,13 +30,13 @@ defaults
     errorfile 504 /etc/haproxy/errors/504.http
 
 frontend www-https
-    bind *:443 ssl crt /etc/letsencrypt/live/www.yourdomain.com/fullchain.pem key /etc/letsencrypt/live/www.yourdomain.com/privkey.pem
+    bind *:443 ssl crt /etc/letsencrypt/live/www.dietalchemy.com/fullchain.pem key /etc/letsencrypt/live/www.yourdomain.com/privkey.pem
     mode http
     default_backend web-backend
 
 backend web-backend
     mode http
-    server web-01 127.0.0.1:80 check
+    server web-01 3.83.253.53 check
 
 frontend http-in
     bind *:80
