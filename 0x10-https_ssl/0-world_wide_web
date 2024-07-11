@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Script to display information about subdomains
+
+# Function to display information for a given subdomain
+display_info() {
+    local subdomain=$1
+    local domain=$2
+    result=$(dig +short "$subdomain.$domain" | awk '{print $0}')
+    if [ -n "$result" ]; then
+        record_type="A"
+        echo "The subdomain $subdomain is a $record_type record and points to $result"
+    else
+        echo "No record found for $subdomain.$domain"
+    fi
+}
+
+# Main script logic
+domain=$1
+specific_subdomain=$2
+
+if [ -z "$domain" ]; then
+    echo "Usage: $0 domain [subdomain]"
+    exit 1
+fi
+
+if [ -n "$specific_subdomain" ]; then
+    display_info "$specific_subdomain" "$domain"
+else
+    subdomains=("www" "lb-01" "web-01" "web-02")
+    for subdomain in "${subdomains[@]}"; do
+        display_info "$subdomain" "$domain"
+    done
+fi
