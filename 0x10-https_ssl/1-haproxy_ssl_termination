@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+# Terminating SSL on HAproxy”
 global
     log /dev/log local0
     log /dev/log local1 notice
