@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Install Nginx if not already installed
+if ! command -v nginx &> /dev/null; then
+    apt-get update && apt-get install -y nginx
+fi
+
+# Update Nginx configuration to run as nginx user and listen on port 8080
+sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/^listen .*/listen 8080;/' /etc/nginx/sites-available/default
+
+# Create the nginx user if it doesn't exist
+if ! id -u nginx &> /dev/null; then
+    useradd -r -d /var/www -s /sbin/nologin nginx
+fi
+
+# Ensure the Nginx PID directory exists and is owned by nginx user
+mkdir -p /var/run/nginx
+chown -R nginx:nginx /var/run/nginx
+
+# Restart Nginx to apply the changes
+systemctl restart nginx
+
+# Verify Nginx is running as nginx user
+ps aux | grep [n]ginx
+
+# Verify Nginx is listening on port 8080
+ss -tuln | grep 8080
