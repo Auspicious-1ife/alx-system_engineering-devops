@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Add MySQL GPG key
+curl -fsSL https://repo.mysql.com/RPM-GPG-KEY-mysql | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/mysql.gpg > /dev/null
+
+# Remove unsupported repository
+sudo add-apt-repository -r ppa:vbernat/haproxy-1.8
+
+# Update Docker GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/docker.gpg > /dev/null
+
+# Update package list
+sudo apt update
