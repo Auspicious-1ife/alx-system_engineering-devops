@@ -21,7 +21,7 @@ chown -R nginx:nginx /var/run/nginx
 systemctl restart nginx
 
 # Verify Nginx is running as nginx user
-ps aux | grep [n]ginx
+ps aux | pgrep [n]ginx
 
 # Verify Nginx is listening on port 8080
 ss -tuln | grep 8080
