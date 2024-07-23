@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# making task 1 short and sweet
 curl -fsSL https://repo.mysql.com/RPM-GPG-KEY-mysql | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/mysql.gpg > /dev/null
 sudo add-apt-repository -r ppa:vbernat/haproxy-1.8
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/docker.gpg > /dev/null
