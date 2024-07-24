@@ -1,0 +1,12 @@
+# Allow incoming connections on port 22 (SSH), 80 (HTTP), and 443 (HTTPS)
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+
+# Redirect incoming traffic on port 8080 to port 80
+# Modify /etc/ufw/before.rules to include port forwarding rules
+# Then reload ufw to apply changes
+sudo ufw reload
+
+# Check the status to ensure the rules are applied correctly
+sudo ufw status verbose
