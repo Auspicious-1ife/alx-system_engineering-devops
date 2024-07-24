@@ -1,0 +1,4 @@
+# /etc/mysql/mysql.conf.d/mysqld.cnf
+server-id = 2
+relay_log = /var/log/mysql/mysql-relay-bin.log
+
