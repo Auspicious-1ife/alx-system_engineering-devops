@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# This script generates a MySQL dump of all databases,
+# compresses it into a tar.gz archive,
+# and names it with the current date
 # Check if the password argument is provided
 if [ -z "$1" ]; then
     echo "Usage: $0 <MySQL root password>"
