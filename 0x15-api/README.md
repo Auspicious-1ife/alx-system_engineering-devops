@@ -1,0 +1,1 @@
+0x15-api, This project is part of the ALX Software Engineering curriculum and aims to provide an in-depth understanding of Application Programming Interfaces (APIs). It includes examples of creating and consuming APIs, handling various request types, and ensuring security and performance.
