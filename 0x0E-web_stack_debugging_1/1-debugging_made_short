@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# Ensure Nginx is running and listening on port 80
-sudo service nginx restart
+# This script solves a nginx error
+sudo kill -9 "$(sudo lsof -t -i :80)"
 
