@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Script to gather TODO list progress for a given employee ID using a REST API and
+Script to gather TODO list progress for a given employee,
+ ID using a REST API and
 export the data in the JSON format.
 """
 
