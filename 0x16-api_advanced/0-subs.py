@@ -1,22 +1,10 @@
 #!/usr/bin/python3
-"""
-0-subs - Function to query subscribers on a given Reddit subreddit.
-"""
-
+"""Function to query subscribers on a given Reddit subreddit."""
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """
-    Queries the Reddit API to get the number of subscribers,
-    for a subreddit.
-
-    Args:
-        subreddit (str): The name of the subreddit.
-
-    Returns:
-        int: The number of subscribers if the subreddit is valid, otherwise 0.
-    """
+    """Return the total number of subscribers on a given subreddit."""
     try:
         url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
         headers = {
